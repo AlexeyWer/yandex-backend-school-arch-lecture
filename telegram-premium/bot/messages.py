@@ -15,12 +15,12 @@ class BaseMessages(abc.ABC):
 
     @abc.abstractmethod
     def echo(self, text: str) -> str:
-        pass
+        raise NotImplemented
 
 
 class RegularUser(BaseMessages):
     def start(self) -> str:
-        return 'Првиет!'
+        return 'Привет!'
 
     def help(self) -> str:
         return 'Вам нужно приобрести подписку'
@@ -38,6 +38,6 @@ class PremiumUser(RegularUser):
 
 
 def get_messages(user: tg.User) -> BaseMessages:
-    if not user.is_premium:
+    if user.is_premium:
         return PremiumUser()
     return RegularUser()

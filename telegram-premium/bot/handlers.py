@@ -1,8 +1,10 @@
 import abc
+from turtle import up
 import typing as tp
 
 import telegram as tg
 import telegram.ext as tg_ext
+
 
 from bot import messages
 
@@ -39,12 +41,12 @@ class HelpHandler(BaseHandler):
         await update.message.reply_text(self.messages.help())
 
 
-class EchoHandler(BaseHandler):
+class EcoHandler(BaseHandler):
     async def handle(
         self, update: tg.Update, context: tg_ext.ContextTypes.DEFAULT_TYPE
     ) -> None:
         await update.message.reply_text(
-            self.messages.echo(update.message.text)
+            self.messages.ehco(update.message.text)
         )
 
 
@@ -54,6 +56,6 @@ def setup_handlers(application: tg_ext.Application) -> None:
 
     application.add_handler(
         tg_ext.MessageHandler(
-            tg_ext.filters.TEXT & ~tg_ext.filters.COMMAND, EchoHandler()
+            tg_ext.filters.TEXT & ~tg_ext.filters.COMMAND, EcoHandler()
         )
     )
